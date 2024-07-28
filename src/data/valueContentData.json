@@ -1,0 +1,46 @@
+ {
+    "list": [
+      {
+        "id": 1,
+        "concept": "Value element",
+        "imgUrl": "https://valenteweb.azureedge.net/$web/assets/cadamovimiento/cm05.png",
+        "title": "Value element 1",
+        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+      },
+      {
+        "id": 2,
+        "concept": "Value element",
+        "imgUrl": "https://valenteweb.azureedge.net/$web/assets/cadamovimiento/cm05.png",
+        "title": "Value element 2",
+        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+      },
+      {
+        "id": 3,
+        "concept": "Value element",
+        "imgUrl": "https://valenteweb.azureedge.net/$web/assets/cadamovimiento/cm05.png",
+        "title": "Value element 3",
+        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+      },
+      {
+        "id": 4,
+        "concept": "Value element",
+        "imgUrl": "https://valenteweb.azureedge.net/$web/assets/cadamovimiento/cm05.png",
+        "title": "Value element 4",
+        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+      },
+      {
+        "id": 5,
+        "concept": "Value element",
+        "imgUrl": "https://valenteweb.azureedge.net/$web/assets/cadamovimiento/cm05.png",
+        "title": "Value element 5",
+        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+      },
+      {
+        "id": 6,
+        "concept": "Value element",
+        "imgUrl": "https://valenteweb.azureedge.net/$web/assets/cadamovimiento/cm05.png",
+        "title": "Value element 6",
+        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+      }
+    ]
+  }
