@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function ProjectTimeStep(props) {
   const { prev, next, jump, total, current, progress  } = useSteps();
-  const { project, handleChange, error, setError , method} = props;
+  const { elementValues, handleChange, error, setError , method} = props;
   const navigate = useNavigate();
 
 
@@ -19,14 +19,14 @@ export default function ProjectTimeStep(props) {
          url = `http://localhost:3001/api/v1/project`
          response = await axios.post(
           url,{
-            'data':project
+            'data':elementValues
           }
         );
         }else{
          url = `http://localhost:3001/api/v1/project/${project.id}`
           response = await axios.patch(
             url,{
-              'data':project
+              'data':elementValues
             }
           );
           
@@ -53,52 +53,52 @@ export default function ProjectTimeStep(props) {
       <div className="form">
           <div className="form flex flex-row gap-3 justify-between items-center mb-5 flex-wrap">
           <div className='w-full'>
-            <p  className='block'>Account company: {project.companyId}</p>
+            <p  className='block'>Account company: {elementValues.companyId}</p>
           </div>
           <div className='w-full'>
-          <p  className='block'>Account user: {project.userId}</p>
+          <p  className='block'>Account user: {elementValues.userId}</p>
 
             </div>
             <div className='w-full'>
-            <p  className='block'>Project name: {project.pname}</p>
+            <p  className='block'>Project name: {elementValues.pname}</p>
 
             </div>
             <div className='w-full'>
-            <p  className='block'>Status: {project.statusId}</p>
+            <p  className='block'>Status: {elementValues.statusId}</p>
  
             </div>
             <div className='w-full'>
-            <p  className='block'>Category: {project.categoryId}</p>
+            <p  className='block'>Category: {elementValues.categoryId}</p>
   
             </div>
             <div className='w-full'>
-            <p  className='block'>Department: {project.departmentId}</p>
+            <p  className='block'>Department: {elementValues.departmentId}</p>
  
             </div>
             <div className='w-full'>
-            <p  className='block'>Priority: {project.priorityId}</p>
+            <p  className='block'>Priority: {elementValues.priorityId}</p>
  
             </div>
             <div className='w-full'>
-            <p  className='block'>Start At: {project.start_at}</p> 
+            <p  className='block'>Start At: {elementValues?.start_at}</p> 
             </div>
             <div className='w-full'>
-            <p  className='block'>Ends At: {project.end_at}</p> 
+            <p  className='block'>Ends At: {elementValues?.end_at}</p> 
             </div>
             <div className='w-full'>
-            <p  className='block'>Updated At: {project.updated_at}</p> 
+            <p  className='block'>Updated At: {elementValues?.updated_at}</p> 
             </div>
             <div className='w-full'>
-            <p  className='block'>Created At: {project.created_at}</p> 
+            <p  className='block'>Created At: {elementValues?.created_at}</p> 
             </div>
             <div className='w-full'>
-            <p  className='block'>Initial budget: {project.initialbudget}</p> 
+            <p  className='block'>Initial budget: {elementValues.initialbudget}</p> 
             </div>
             <div className='w-full'>
-            <p  className='block'>Initial cost: {project.initialcost}</p> 
+            <p  className='block'>Initial cost: {elementValues.initialcost}</p> 
             </div>
             <div className='w-full'>
-            <p  className='block'>Description: {project.pdesc}</p> 
+            <p  className='block'>Description: {elementValues.pdesc}</p> 
             </div>
           </div>
           <div className="navigation">

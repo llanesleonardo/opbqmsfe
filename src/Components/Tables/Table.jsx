@@ -20,7 +20,7 @@ export default function Table({ title, handleClick }) {
   }, [title[0]]);
 
   return (
-    <div className="mx-5 w-[95%] overflow-x-auto pb-[300px] bg-white rounded">
+    <div className="mx-5 w-[95%] overflow-x-auto  bg-white rounded">
       {loadingElement  ? (
                         <div className='my-10'>
                         <PulseLoader
@@ -46,7 +46,7 @@ export default function Table({ title, handleClick }) {
             </tr>
           </thead>
           <tbody>
-            {list?.projects?.map((element) => {
+            {list[title[1]]?.map((element) => {
               return (
                 <tr key={`row-${element?.id}`}>
                   {list?.columns?.map((column,index) => {

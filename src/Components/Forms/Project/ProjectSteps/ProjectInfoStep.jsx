@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 
 export default function ProjectInfoStep(props) {
   const { prev, next, jump, total, current, progress  } = useSteps();
-  const { elementValues, handleChange, error, setError, defaultValues ,loading} = props;
+  const { elementValues, handleChange, error, setError,setElementValues, defaultTables ,loading} = props;
 
 // Regular expression to match any non-digit character
 const patternNonDigits = /\D/;
@@ -13,7 +13,7 @@ const patternNonDigitsButDollarSign = /[^\d$.]/;
 
   const handleNext = () =>{
 
-    if (!elementValuesx.pname) {
+    if (!elementValues.pname) {
       console.log('You need to assigned a name to the project.');
       setError({
         ...error,
@@ -21,7 +21,7 @@ const patternNonDigitsButDollarSign = /[^\d$.]/;
       });
       return;
     }
-  if (!elementValuesx.statusId || elementValuesx.statusId === '') {
+  if (!elementValues.statusId || elementValues.statusId === '') {
       console.log('You need to assigned a status to the project.');
       setError({
         ...error,
@@ -29,7 +29,7 @@ const patternNonDigitsButDollarSign = /[^\d$.]/;
       });
       return;
     }
-    if (!elementValuesx.categoryId || elementValuesx.categoryId === '') {
+    if (!elementValues.categoryId || elementValues.categoryId === '') {
       console.log('You need to assigned a categoy to the project.');
       setError({
         ...error,
@@ -37,7 +37,7 @@ const patternNonDigitsButDollarSign = /[^\d$.]/;
       });
       return;
     }
-    if (!elementValuesx.departmentId || elementValuesx.departmentId === '') {
+    if (!elementValues.departmentId || elementValues.departmentId === '') {
       console.log('You need to assigned a department to the project.');
       setError({
         ...error,
@@ -46,7 +46,7 @@ const patternNonDigitsButDollarSign = /[^\d$.]/;
       return;
     }
     
-    if (!elementValuesx.priorityId || elementValuesx.priorityId === '') {
+    if (!elementValues.priorityId || elementValues.priorityId === '') {
       console.log('You need to assigned a priority to the project.');
       setError({
         ...error,
@@ -55,7 +55,7 @@ const patternNonDigitsButDollarSign = /[^\d$.]/;
       return;
     }
 
-    if (patternNonDigitsButDollarSign.test(elementValuesx.initialbudget)) {
+    if (patternNonDigitsButDollarSign.test(elementValues.initialbudget)) {
       console.log('You $ amount has a word or a letter.');
        setError({
         ...error,
@@ -65,7 +65,7 @@ const patternNonDigitsButDollarSign = /[^\d$.]/;
     }else{
             // CHECK IF BUDGET VALUE HAS A LETTER/WORD
 
-      const costValue =  elementValuesx.initialbudget;
+      const costValue =  elementValues.initialbudget;
       if (costValue) {
         console.log(costValue);
         const formattedValue = formatCurrency(costValue);
@@ -73,11 +73,11 @@ const patternNonDigitsButDollarSign = /[^\d$.]/;
        // setProject({ ...project, 'initialbudget':formattedValue});
         setElementValues(prev => ({ ...prev, 'initialbudget':formattedValue}));
 
-        console.log('initialbudget project',elementValuesx);
+        console.log('initialbudget project',elementValues);
       }
     }
 
-    if (patternNonDigitsButDollarSign.test(elementValuesx.initialcost)) {
+    if (patternNonDigitsButDollarSign.test(elementValues.initialcost)) {
       console.log('You $ amount has a word or a letter.');
       setError({
         ...error,
@@ -86,10 +86,10 @@ const patternNonDigitsButDollarSign = /[^\d$.]/;
       return;
     }else{
       // CHECK IF COST VALUE HAS A LETTER/WORD
-      const costValue =  elementValuesx.initialcost;
+      const costValue =  elementValues.initialcost;
       if (costValue) {
         const formattedValue = formatCurrency(costValue);
-        setProject(prev => ({ ...prev, 'initialcost':formattedValue}));
+        setElementValues(prev => ({ ...prev, 'initialcost':formattedValue}));
       }
     }
 
@@ -155,29 +155,30 @@ const patternNonDigitsButDollarSign = /[^\d$.]/;
         {error.pname && <span className='text-red-500'>{error.pname}</span>}
       </div>
       </div>
-   {loading ? (<p>laoding</p>):(
+   {loading && defaultTables ? (<p>loading</p>):(
     <>
+    {console.log(defaultTables)}
     <div className='w-52'>
-    {<Select arrayValues={defaultValues?.status} title={'status'} handleChange={handleChange} project={elementValues} defaultV={elementValues?.statusId} loading={loading}/>}
+    {<Select arrayValues={defaultTables?.statusId} title={'status'} handleChange={handleChange} project={elementValues} defaultV={elementValues?.statusId} loading={loading}/>}
 
      <div>
        {error.statusId && <span className='text-red-500'>{error.statusId}</span>}
        </div>
      </div>
      <div className='w-52'> 
-     {<Select arrayValues={defaultValues?.category} title={'category'} handleChange={handleChange} project={elementValues} defaultV={elementValues?.categoryId} loading={loading} />}
+     {<Select arrayValues={defaultTables?.categoryId} title={'category'} handleChange={handleChange} project={elementValues} defaultV={elementValues?.categoryId} loading={loading} />}
      <div>
      {error.categoryId && <span className='text-red-500'>{error.categoryId}</span>}
      </div>
      </div>
      <div className='w-52'> 
-     {<Select arrayValues={defaultValues?.department} title={'department'}  handleChange={handleChange} project={elementValues} defaultV={elementValues?.departmentId} loading={loading}/>}
+     {<Select arrayValues={defaultTables?.departmentId} title={'department'}  handleChange={handleChange} project={elementValues} defaultV={elementValues?.departmentId} loading={loading}/>}
      <div>
        {error.departmentId && <span className='text-red-500'>{error.departmentId}</span>}
        </div>
      </div>
      <div className='w-52'> 
-     {<Select arrayValues={defaultValues?.priority} title={'priority'} handleChange={handleChange} project={elementValues} defaultV={elementValues?.priorityId} loading={loading}/>}
+     {<Select arrayValues={defaultTables?.priorityId} title={'priority'} handleChange={handleChange} project={elementValues} defaultV={elementValues?.priorityId} loading={loading}/>}
      <div>
        {error.priorityId && <span className='text-red-500'>{error.priorityId}</span>}
        </div>

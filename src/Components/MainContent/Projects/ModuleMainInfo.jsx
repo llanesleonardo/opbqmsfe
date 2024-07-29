@@ -8,12 +8,13 @@ export default function ModuleMainInfo({
   pathName,
   loadingElement,
 }) {
-  useEffect(() => {
+ /* useEffect(() => {
     const setBackendValues = async () => {
       await getElement(pathId, pathName);
     };
     setBackendValues();
-  }, [pathId, pathName]);
+    console.log('setBackendValues');
+  }, [pathId, pathName]);*/
 
   const widthField = "w-2/3 pl-2";
   const widthFieldName = "w-1/3";
@@ -21,7 +22,7 @@ export default function ModuleMainInfo({
 
   return (
     <div className="flex flex-row flex-nowrap  justify-center items-start">
-      {loadingElement ? (
+      {loadingElement && !elementValues ? (
         <div className="my-10">
           <PulseLoader
             color={"#fff"}

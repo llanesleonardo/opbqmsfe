@@ -9,6 +9,7 @@ import {ChooseContext } from "../../Helpers/ContextHelpers/ChooseContext";
 import { setPathValues } from "../../Helpers/UrlHeperls/urlHelper";
 import { SystemContext } from "../../Context/systemContext";
 import PulseLoader from "react-spinners/PulseLoader";
+import Table from "../../Components/Tables/Table";
 
 export default function ElementDetail({modulesTitles,moduleSettings}) {
     const { user } = useContext(UserContext);
@@ -27,14 +28,28 @@ export default function ElementDetail({modulesTitles,moduleSettings}) {
     //useContext(ChooseContext(modulesTitles[pathModule][1]));
       const { systemValues, systemModuleValue,getSystemValues,getSystemModuleValue,loading } = useContext(SystemContext);  
 
-      const setSystemValues  = async () =>{
+ 
+
+      const setSystemValues  = async (pathModule) =>{
         await getSystemModuleValue(pathModule);
       };
-      
+
+   
       useEffect(()=>{
         setSystemValues(pathModule);
      },[pathModule]);
     
+     useEffect(() => {
+      const setBackendValues = async () => {
+        await getElement(pathId, pathName);
+      };
+      
+      setBackendValues();
+      console.log('setBackendValues');
+    }, [pathId, pathName]);
+  
+
+
 
     const handleClick = async (link,action) =>{
       if (action === 'delete') {
@@ -50,7 +65,7 @@ export default function ElementDetail({modulesTitles,moduleSettings}) {
     <div className='w-full h-svh bg-slate-200 '>
     <div className='w-auto h-[90%] overflow-y-scroll '>
     <div className='w-[90%] mx-auto flex flex-row flex-nowrap justify-between items-center'> 
-    {console.log('Element detail moduleSettings',moduleSettings.modulesStructure['Context'].titles)}
+
     {modulesTitles === undefined ? (
                 <div className='my-10'>
                 <PulseLoader
@@ -79,7 +94,13 @@ export default function ElementDetail({modulesTitles,moduleSettings}) {
         }
      </div>
         <div className='bg-white rounded border-1 w-[90%] mx-auto py-5 px-5 mt-5' >
-        <div className='flex flex-row flex-nowrap justify-between items-center'> <p className='w-full text-sky-700 font-bold mb-3'>Processes </p> </div>
+        <div className='flex flex-col flex-nowrap justify-between items-center'>
+           <p className='w-full text-sky-700 font-bold mb-3'>Processes </p>          
+            <Table
+                title={['process','processes']}
+                handleClick={handleClick}
+              /> 
+           </div>
         </div>
         <div className='bg-white rounded border-1 w-[90%] mx-auto py-5 px-5 mt-5' >
         <div className='flex flex-row flex-nowrap justify-between items-center'> <p className='w-full text-sky-700 font-bold mb-3'>Users </p> </div>

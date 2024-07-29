@@ -4,6 +4,7 @@ import axios from "axios";
 import "../../../styles.css";
 import ProjectInfoStep from "./ProjectSteps/ProjectInfoStep";
 import ProjectTimeStep from "./ProjectSteps/ProjectTimeStep";
+import { IsoDate } from "../../../Helpers/DateHelpers/DateHelper";
 
 export default function CreateProjectForm(props) {
   const { prev, next, jump, total, current, progress } = useSteps();
@@ -27,7 +28,7 @@ export default function CreateProjectForm(props) {
     initialbudget: "",
     start_at: undefined,
     end_at: undefined,
-    updated_at: new Date(),
+    updated_at: IsoDate(new Date()),
     created_at: undefined,
   });
   const [error, setError] = useState({
@@ -54,7 +55,7 @@ export default function CreateProjectForm(props) {
           console.log("error");
           return;
         }
-        console.log(response);
+        console.log('setProject',response.data.defaultTables);
         setProject((prev) => ({
           ...prev,
           companyId: response.data.projectData.company[0],
@@ -110,15 +111,15 @@ export default function CreateProjectForm(props) {
           <div className="steps_wrapper w-full bg-white">
             <Steps>
               <ProjectInfoStep
-                project={project}
+                elementValues={project}
                 handleChange={handleChange}
                 error={error}
                 setError={setError}
-                setProject={setProject}
+                setElementValues={setProject}
                 defaultTables={defaultTables}
               />
               <ProjectTimeStep
-                project={project}
+                elementValues={project}
                 handleChange={handleChange}
                 error={error}
                 setError={setError}
