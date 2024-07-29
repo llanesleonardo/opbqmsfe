@@ -1,31 +1,40 @@
-import React, {useState} from 'react'
+import React, {useState,useContext,useEffect} from 'react'
 import { Link } from 'react-router-dom';
+import { SystemContext } from "../../Context/systemContext";
 
 export default function NavMenu() {
+  const { publicPages,systemValues, getSystemValues, loading,getPublicPagesInfo } = useContext(SystemContext);
+
   const [openDropdown, setOpenDropdown] = useState(null);
 
   const toggleDropdown = (index) => {
     setOpenDropdown(openDropdown === index ? null : index);
   };
 
+  const setPublicPages = async () => {
+    await getPublicPagesInfo();
+  };
+  useEffect(() => {
+    setPublicPages();
+  }, []);
+
+
   return (
     <div className="">
         <ul className='flex flex-row flex-wrap justify-end items-center gap-10 mr-5'>
-            <li className='text-white'>
-            <Link to="/">Home</Link>
-            </li>
-            <li className='text-white'>
-            <Link to="/about">About</Link>
-            </li>
-            <li className='text-white'>
-            <Link to="/features">Features</Link>
-            </li>
-            <li className='text-white'>
-            <Link to="/contact">Contact</Link>
-            </li>
-            <li className='text-white'>
-            <Link to="/login">Log in</Link>
-            </li>
+       {publicPages ? (
+        publicPages?.navMenus?.map((menuItem, index) => {
+          if(
+            menuItem.modulesTitles[0] !== 'createaccount' 
+            && menuItem.modulesTitles[0] !== 'faq'
+            && menuItem.modulesTitles[0] !== 'passwordreset'
+          ){
+            return (<li key={index} className='text-white'>
+              <Link to={`/${menuItem.url}`}>{menuItem.label}</Link>
+            </li>)
+           }
+          }
+        )):('')}       
             <li className='text-white'>
             <Link to="/app/main-dashboard">Go to your account</Link>
             </li>

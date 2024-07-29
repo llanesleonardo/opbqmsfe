@@ -1,13 +1,11 @@
 import React from 'react'
-import { ProjectContext } from '../../Context/projectContext';
+import { DataContext } from '../../Context/dataContext';
 
 
 export  function ChooseContext(module) {
     switch (module) {
-        case 'projects':
-            return ProjectContext;  
-        case 'processes':
-            return ProjectContext;   
+        case 'data':
+            return DataContext;    
         default:
             break;
     }

@@ -2,7 +2,7 @@ import React from "react";
 import { 
     Cog8ToothIcon, 
   } from "@heroicons/react/24/solid";
-
+  import { Link } from "react-router-dom";
 import MainMenuApp from "./MainMenuApp"
 import LogoApp from "../Logos/LogoApp";
 
@@ -18,7 +18,15 @@ export default function VerticalMenu() {
         <MainMenuApp />
       </div>
       <div className="w-full">
+       <ul>
+       <li>
+       <div className="flex flex-row justify-start items-center">
+          <Link to={'/'} className="text-white pl-5 mb-5">Home page</Link>
+       </div>
+       </li>
+        </ul>
         <Cog8ToothIcon className="w-6 text-white ml-5 mb-5" />
+     
       </div>
     </div>
     </div>

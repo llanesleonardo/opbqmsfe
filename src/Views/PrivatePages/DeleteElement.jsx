@@ -6,12 +6,11 @@ import { firstLetterToUpperCase} from "../../Helpers/StringHelpers/StringHelper"
 import {ChooseContext } from "../../Helpers/ContextHelpers/ChooseContext";
 import ModuleHeader from "../../Components/Headers/ModuleHeader";
 import { setPathValues } from "../../Helpers/UrlHeperls/urlHelper";
-import {modulesTitles} from "../../data/modulesTitles";
 import {ChooseForm} from "../../Helpers/FormHelpers/ChooseForm";
 import { SystemContext } from "../../Context/systemContext";
 import PulseLoader from "react-spinners/PulseLoader";
 
-export default function DeleteProject() {
+export default function DeleteProject({modulesTitles,moduleSettings}) {
 
   const { user } = useContext(UserContext);
   let location = useLocation();
@@ -26,7 +25,7 @@ const {
   getElement,
   deleteElement,
   loadingElement,
-} = useContext(ChooseContext(modulesTitles[pathModule][1])); 
+} = useContext(ChooseContext('data')); 
 const { systemValues, systemModuleValue,getSystemValues,getSystemModuleValue,loading } = useContext(SystemContext);  
 
 const setElementValue  = async (pathId,pathName) =>{
@@ -68,7 +67,7 @@ useEffect(() => {
       <div className="w-full h-svh bg-slate-200  ">
         <div className="w-auto h-[90%] overflow-y-scroll ">
             <div className="w-[90%] mx-auto flex flex-row flex-nowrap justify-between items-center">
-            {systemModuleValue.modulesTitles === undefined ? (
+            {modulesTitles === undefined ? (
                         <div className="my-10">
                         <PulseLoader
                           color={"#fff"}

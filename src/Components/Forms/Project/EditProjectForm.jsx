@@ -6,7 +6,6 @@ import { useLocation } from 'react-router-dom';
 import ProjectInfoStep from "./ProjectSteps/ProjectInfoStep";
 import ProjectTimeStep from "./ProjectSteps/ProjectTimeStep";
 import {ChooseContext } from "../../../Helpers/ContextHelpers/ChooseContext";
-import { modulesTitles } from "../../../data/modulesTitles";
  
 export default function EditProjectForm({ title, element, getElement, pathModule, pathName, pathId, action, loading}) {
   const { prev, next, jump, total, current, progress } = useSteps();

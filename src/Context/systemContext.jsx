@@ -1,27 +1,39 @@
 import React, { createContext, useState, useEffect, useCallback } from "react";
-import { documentControlMenu } from "../data/menusData"
+import settings from "../../settings";
+import elementsAPI from '../Helpers/ApiHelpers/elementsAPI';
 
+const  {getSystemSettingData } = elementsAPI(); 
 
 const SystemContext = createContext();
 
 const SystemProvider = ({ children }) => {
 
-  const [systemValues, setSystemValues] = useState([]);
+  const [systemModulesValues, setSystemModulesValues] = useState({});
   const [systemModuleValue,setSystemModuleValue] = useState({});
+  const [publicPages,setPublicPages] = useState({});
   const [loading,setLoading] = useState(false);
   //console.log(documentControlMenu);
-  const getSystemValues = async () =>{
+  const getSystemModulesValues = async () =>{
     setLoading(true);
-      setSystemValues(documentControlMenu);
-      setLoading(false);
+    const data = await getSystemSettingData();
+    //console.log('getSystemModulesValues',data);
+    setSystemModulesValues(data? data?.modulesSettings : null);
+    setLoading(false);
   };
+
+const getPublicPagesInfo = ()=>{
+  setLoading(true);
+  setPublicPages(settings.generalSettings.publicPages);
+  setLoading(false);
+}
 
 
   const getSystemModuleValue = async (pathModule) => {
     setLoading(true);
     // Simulate API call delay with setTimeout (remove in production)
-
-      const module = documentControlMenu.find(item => item.url === `/app/${pathModule}`);
+   // console.log('pathModule',pathModule);
+    const data = await getSystemSettingData();
+      const module = data ? data?.modulesSettings?.navMenus.find(item => item.url === `/app/${pathModule}`) : null;
       if (module) {
         setSystemModuleValue(module);
       } else {
@@ -33,10 +45,12 @@ const SystemProvider = ({ children }) => {
   return (
     <SystemContext.Provider
       value={{
-        systemValues,
+        systemModulesValues,
         systemModuleValue,
-        getSystemValues,
+        publicPages,
+        getSystemModulesValues,
         getSystemModuleValue,
+        getPublicPagesInfo,
         loading
       }}
     >

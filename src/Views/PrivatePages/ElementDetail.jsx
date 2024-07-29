@@ -1,17 +1,16 @@
 import React,{ useContext, useEffect,useState } from 'react'
 import { useLocation } from 'react-router-dom';
-import { UserContext } from '../../../Context/userContext';
+import { UserContext } from '../../Context/userContext';
 import { useNavigate } from 'react-router-dom';
-import ModuleHeader from '../../../Components/Headers/ModuleHeader';
-import { firstLetterToUpperCase} from "../../../Helpers/StringHelpers/StringHelper"
-import ModuleMainInfo from '../../../Components/MainContent/Projects/ModuleMainInfo';
-import {ChooseContext } from "../../../Helpers/ContextHelpers/ChooseContext";
-import { setPathValues } from "../../../Helpers/UrlHeperls/urlHelper";
-import {modulesTitles} from "../../../data/modulesTitles";
-import { SystemContext } from "../../../Context/systemContext";
+import ModuleHeader from '../../Components/Headers/ModuleHeader';
+import { firstLetterToUpperCase} from "../../Helpers/StringHelpers/StringHelper"
+import ModuleMainInfo from '../../Components/MainContent/Projects/ModuleMainInfo';
+import {ChooseContext } from "../../Helpers/ContextHelpers/ChooseContext";
+import { setPathValues } from "../../Helpers/UrlHeperls/urlHelper";
+import { SystemContext } from "../../Context/systemContext";
 import PulseLoader from "react-spinners/PulseLoader";
 
-export default function ProjectDetail() {
+export default function ElementDetail({modulesTitles,moduleSettings}) {
     const { user } = useContext(UserContext);
     let location = useLocation();
     const navigate = useNavigate();
@@ -24,7 +23,8 @@ export default function ProjectDetail() {
       getElement,
       deleteElement,
       loadingElement
-    } = useContext(ChooseContext(modulesTitles[pathModule][1]));
+    } = useContext(ChooseContext('data'));
+    //useContext(ChooseContext(modulesTitles[pathModule][1]));
       const { systemValues, systemModuleValue,getSystemValues,getSystemModuleValue,loading } = useContext(SystemContext);  
 
       const setSystemValues  = async () =>{
@@ -50,7 +50,8 @@ export default function ProjectDetail() {
     <div className='w-full h-svh bg-slate-200 '>
     <div className='w-auto h-[90%] overflow-y-scroll '>
     <div className='w-[90%] mx-auto flex flex-row flex-nowrap justify-between items-center'> 
-    {systemModuleValue.modulesTitles === undefined ? (
+    {console.log('Element detail moduleSettings',moduleSettings.modulesStructure['Context'].titles)}
+    {modulesTitles === undefined ? (
                 <div className='my-10'>
                 <PulseLoader
                  color={"#fff"}
@@ -62,7 +63,7 @@ export default function ProjectDetail() {
                </div>
               ) : (
                 <ModuleHeader
-                  titles={systemModuleValue.modulesTitles}
+                  titles={modulesTitles}
                   pathId={pathId}
                   handleClick={handleClick}
                   modStr={firstLetterToUpperCase(pathName)}

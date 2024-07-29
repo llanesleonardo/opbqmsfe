@@ -1,9 +1,9 @@
 import React, { createContext, useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import elementsAPI from "../Helpers/ApiHelpers/elementsAPI";
-const ProjectContext = createContext();
+const DataContext = createContext();
 
-const ProjectProvider = ({ children }) => {
+const DataProvider = ({ children }) => {
   const  {getElementEP,getListEP,deleteElementEP,updateElementEP } = elementsAPI();
   
   const [list, setList] = useState([]);
@@ -25,7 +25,7 @@ const ProjectProvider = ({ children }) => {
   const updateElement =  useCallback(async (pathId,pathName) =>{  setUpdatedElement(await updateElementEP(pathId,pathName))},[]);
 
   return (
-    <ProjectContext.Provider
+    <DataContext.Provider
       value={{
         list,
         element,
@@ -39,8 +39,8 @@ const ProjectProvider = ({ children }) => {
       }}
     >
       {children}
-    </ProjectContext.Provider>
+    </DataContext.Provider>
   );
 };
 
-export { ProjectContext, ProjectProvider };
+export { DataContext, DataProvider };

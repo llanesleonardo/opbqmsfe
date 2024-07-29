@@ -1,20 +1,22 @@
 import React, { useEffect, useContext, useState } from "react";
-import { UserContext } from "../../../Context/userContext";
-import Table from "../../../Components/Tables/Table";
-import ModuleHeader from "../../../Components/Headers/ModuleHeader";
+import { UserContext } from "../../Context/userContext";
+import Table from "../../Components/Tables/Table";
+import ModuleHeader from "../../Components/Headers/ModuleHeader";
 import { useNavigate } from "react-router-dom";
-import { firstLetterToUpperCase } from "../../../Helpers/StringHelpers/StringHelper";
+import { firstLetterToUpperCase } from "../../Helpers/StringHelpers/StringHelper";
 import { useLocation } from "react-router-dom";
-import { setPathValues } from "../../../Helpers/UrlHeperls/urlHelper";
-import { SystemContext } from "../../../Context/systemContext";
+import { setPathValues } from "../../Helpers/UrlHeperls/urlHelper";
+import { SystemContext } from "../../Context/systemContext";
 import PulseLoader from "react-spinners/PulseLoader";
 
-export default function ProjectLists() {
+export default function ListElements({modulesTitles,moduleSettings}) {
+  
   const navigate = useNavigate();
   let location = useLocation();
   const { user } = useContext(UserContext);
   const {
     systemValues,
+    systemModulesValues,
     systemModuleValue,
     getSystemValues,
     getSystemModuleValue,
@@ -26,9 +28,10 @@ export default function ProjectLists() {
     await getSystemModuleValue(pathModule);
   };
 
-  useEffect(() => {
-    setSystemValues(pathModule);
-  }, [pathModule]);
+
+useEffect(() => {
+  setSystemValues(pathModule);
+}, []);
 
   const handleClick = async (link, action) => {
     navigate(`${link}`);
@@ -40,7 +43,8 @@ export default function ProjectLists() {
         <div className="w-auto h-[90%] overflow-y-scroll">
           <div className="w-auto overflow-y-scroll flex flex-col flex-wrap  justify-start items-center">
             <div className="w-[95%] mx-auto flex flex-row flex-nowrap justify-between items-center">
-              {systemModuleValue.modulesTitles === undefined ? (
+              {console.log('moduleSettings',moduleSettings.modulesStructure['Context'])}
+              {modulesTitles === undefined ? (
                 <div className="my-10">
                   <PulseLoader
                     color={"#fff"}
@@ -52,7 +56,7 @@ export default function ProjectLists() {
                 </div>
               ) : (
                 <ModuleHeader
-                  titles={systemModuleValue.modulesTitles}
+                  titles={modulesTitles}
                   pathId={pathId}
                   handleClick={handleClick}
                   modStr={firstLetterToUpperCase(pathModule)}
@@ -61,7 +65,7 @@ export default function ProjectLists() {
                 />
               )}
             </div>
-            {systemModuleValue.modulesTitles === undefined ? (
+            {modulesTitles === undefined ? (
               <div className="my-10">
                 <PulseLoader
                   color={"#fff"}
@@ -73,7 +77,7 @@ export default function ProjectLists() {
               </div>
             ) : (
               <Table
-                title={systemModuleValue.modulesTitles}
+                title={modulesTitles}
                 handleClick={handleClick}
               />
             )}

@@ -7,11 +7,13 @@ import PulseLoader from "react-spinners/PulseLoader";
 export default function Table({ title, handleClick }) {
 
   const { list, element, getList, getElement, deleteElement, loadingElement } =
-    useContext(ChooseContext(title[1]));
+  useContext(ChooseContext('data')); 
+  // useContext(ChooseContext(title[1]));
+
 
   const setValues = useCallback(async () => {
     await getList(title[0]);
-  }, [getList]);
+  }, [title]);
 
   useEffect(() => {
     setValues();

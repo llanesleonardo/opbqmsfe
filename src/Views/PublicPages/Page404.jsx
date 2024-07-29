@@ -1,9 +1,24 @@
 import React from 'react'
+import {Link } from "react-router-dom";
+export default function Page404(props) {
 
-export default function Page404() {
+  const { cssObject , generalSettings } = props;
+
+  const { title } =generalSettings;
+  const {
+    buttonColor,
+    shapeButton,
+    side,
+    bgcolor,
+    color,
+    buttonTextColor
+  } = cssObject.Heros;
+
+
   return (
-    <div className='py-1 h-svh flex flex-row flex-nowrap justify-center items-center'>
-       <h1 className='text-4xl'>404 Not Found</h1>
+    <div className={`${bgcolor} py-1 gap-5 h-svh flex flex-col flex-nowrap ${side} items-center`}>
+       <h1 className={`text-4xl ${color}`}>{title}</h1>
+       <Link to='/' className={`py-2 px-3 ${buttonTextColor} ${shapeButton} ${buttonColor}`}>Back to Home</Link>
     </div>
   )
 }

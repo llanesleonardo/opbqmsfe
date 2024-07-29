@@ -10,7 +10,7 @@ import { SystemContext } from "../../Context/systemContext";
 import { ChooseForm } from "../../Helpers/FormHelpers/ChooseForm";
 import PulseLoader from "react-spinners/PulseLoader";
 
-export default function CreateProject() {
+export default function CreateElement({modulesTitles,moduleSettings}) {
   const { user } = useContext(UserContext);
   let location = useLocation();
   const navigate = useNavigate();
@@ -54,7 +54,7 @@ export default function CreateProject() {
         <div className="w-full h-svh bg-slate-200  ">
           <div className="w-auto h-[90%] overflow-y-scroll">
             <div className="w-[90%] mx-auto flex flex-row flex-nowrap justify-between items-center">
-              {systemModuleValue.modulesTitles === undefined ? (
+              {modulesTitles === undefined ? (
                 <div className="my-10">
                   <PulseLoader
                     color={"#fff"}
@@ -66,7 +66,7 @@ export default function CreateProject() {
                 </div>
               ) : (
                 <ModuleHeader
-                  titles={systemModuleValue.modulesTitles}
+                  titles={modulesTitles}
                   pathId={pathId}
                   handleClick={handleClick}
                   modStr={firstLetterToUpperCase(pathName)}

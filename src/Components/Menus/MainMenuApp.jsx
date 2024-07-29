@@ -3,28 +3,22 @@ import { Link } from "react-router-dom";
 import { SystemContext } from "../../Context/systemContext";
 import PulseLoader from "react-spinners/PulseLoader";
 export default function MainMenuApp() {
-  const { systemValues, getSystemValues, loading } = useContext(SystemContext);
+  const { systemModulesValues, getSystemModulesValues, loading } = useContext(SystemContext);
   const [activeSubMenus, setActiveSubMenus] = useState({});
 
   const setSystemValues = async () => {
-    await getSystemValues();
+    await getSystemModulesValues();
   };
   useEffect(() => {
     setSystemValues();
   }, []);
 
-  const toggleSubMenu = (index) => {
-    setActiveSubMenus((prevState) => {
-      const newState = [...prevState];
-      newState[index] = !newState[index];
-      return newState;
-    });
-  };
 
   return (
     <ul>
-      {systemValues ? (
-        systemValues.map((menuItem, index) => {
+      {console.log(systemModulesValues.navMenus)}
+      {systemModulesValues ? (
+        systemModulesValues?.navMenus?.map((menuItem, index) => {
           return (
             <li
               key={index}
@@ -35,38 +29,14 @@ export default function MainMenuApp() {
                 <Link to={menuItem?.url} className="text-white">
                   {menuItem?.label}
                 </Link>
-                {menuItem?.submenu && menuItem?.submenu.length > 0 && (
-                  <button
-                    onClick={() => toggleSubMenu(index)}
-                    className="text-white ml-2"
-                  >
-                    {activeSubMenus[index] ? "-" : "+"}
-                  </button>
-                )}
+                
               </div>
-              {menuItem?.submenu && menuItem?.submenu.length > 0 && (
-                <div
-                  className={`submenu-container ${
-                    activeSubMenus[index] ? "show" : ""
-                  }`}
-                >
-                  <ul>
-                    {menuItem?.submenu.map((subMenuItem, subIndex) => (
-                      <li key={subIndex} className="submenu-item py-1">
-                        {subMenuItem?.icon}
-                        <Link to={subMenuItem?.url} className="text-white">
-                          {subMenuItem?.label}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
             </li>
           );
         })
       ) : (
-        <li>
+       <>
+       <li>
           <PulseLoader
             color={"#fff"}
             loading={loading}
@@ -75,6 +45,7 @@ export default function MainMenuApp() {
             data-testid="loader"
           />
         </li>
+        </>  
       )}
     </ul>
   );

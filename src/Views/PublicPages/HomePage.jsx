@@ -2,29 +2,29 @@ import React from "react";
 import Hero from "../../Components/Sections/Hero";
 import MarketingGrid from "../../Components/Sections/MarketingGrid";
 import valueContentData from "../../data/valueContentData.json"
-export default function HomePage() {
+import { SunIcon } from "@heroicons/react/24/solid";
+export default function HomePage(props) {
+  
+  const {cssObject,generalSettings } = props;
+  const { title, subtitle,url } = generalSettings;
+  const {Heros, MarketingGrids} = cssObject;
+
+
   return (
     <>
       <Hero
-        title="Improve one percent each day."
-        subtitle="This is the solution to progress."
+        title={title}
+        subtitle={subtitle}
         content=""
-        link="/features"
+        link="/createaccount"
         linkContent="Start now!"
-        side="justify-center"
-        bgcolor="bg-sky-600"
-        size="h-96"
-        color="text-white"
+        cssObject={Heros}
         isButtonShown={true}
       />
       <MarketingGrid
         title="Features"
         subtitle="You wont stop innovating your company"
-        side="justify-center"
-        bgcolor="bg-white"
-        size=""
-        color="text-blue"
-        aligment="text-center"
+        cssObject={MarketingGrids}
         valueContentData={valueContentData.list}
         numberBlocks={3}
       />

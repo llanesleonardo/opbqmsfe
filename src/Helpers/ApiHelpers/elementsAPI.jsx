@@ -1,6 +1,19 @@
 import axios from "axios";
 
 const elementsAPI = () => { 
+
+const getSystemSettingData = async ()=>{
+  try {
+    const response = await axios.get(
+      `http://localhost:3001/api/v1/settings`
+    );
+    console.log('getSystemSettingData',response);
+ return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+} 
+
 const getElementEP = async (pathId,pathName,setLoadingElement) => {
   setLoadingElement(true);  
   try {
@@ -68,7 +81,7 @@ const getElementEP = async (pathId,pathName,setLoadingElement) => {
   };
 
 
-return {getElementEP,getListEP,deleteElementEP,updateElementEP }
+return {getSystemSettingData, getElementEP,getListEP,deleteElementEP,updateElementEP }
 }
 
 export default elementsAPI;
