@@ -35,7 +35,7 @@ export default function ProjectTimeStep(props) {
 
         if (response.status === 200 || response.status === 201) {
           console.log('response.data',response.data);
-          navigate('/app/main-projects');
+          navigate('/app/projects');
 
         }else{
           console.log(" status error ");

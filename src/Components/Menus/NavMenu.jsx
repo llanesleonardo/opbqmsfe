@@ -3,7 +3,13 @@ import { Link } from 'react-router-dom';
 import { SystemContext } from "../../Context/systemContext";
 
 export default function NavMenu() {
-  const { publicPages,systemValues, getSystemValues, loading,getPublicPagesInfo } = useContext(SystemContext);
+  const {  
+    modulesSettings,
+    publicPagesSettings,
+    getModuleSettings,
+    getPublicPagesSettings,
+    loading
+   } = useContext(SystemContext);
 
   const [openDropdown, setOpenDropdown] = useState(null);
 
@@ -11,19 +17,19 @@ export default function NavMenu() {
     setOpenDropdown(openDropdown === index ? null : index);
   };
 
-  const setPublicPages = async () => {
-    await getPublicPagesInfo();
+  const setPublicPagesSettings = async () => {
+    await getPublicPagesSettings();
   };
   useEffect(() => {
-    setPublicPages();
+    setPublicPagesSettings();
   }, []);
 
 
   return (
     <div className="">
         <ul className='flex flex-row flex-wrap justify-end items-center gap-10 mr-5'>
-       {publicPages ? (
-        publicPages?.navMenus?.map((menuItem, index) => {
+       {!loading && publicPagesSettings ? (
+        publicPagesSettings?.navMenus?.map((menuItem, index) => {
           if(
             menuItem.modulesTitles[0] !== 'createaccount' 
             && menuItem.modulesTitles[0] !== 'faq'

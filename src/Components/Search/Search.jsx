@@ -81,7 +81,7 @@ export default function Search({ setUrl}) {
         value={searchInput}
         onChange={handleInputChange}
         className='w-full mx-5 my-5 rounded py-1 px-1 focus:outline-none'
-        placeholder='Search projects, processes, profiles, roles, users '
+        placeholder='Search projects and defects '
       />
       <div ref={dropdownRef} className=' overflow-y-scroll absolute px-2 left-5 top-10 mt-2  w-[90%] max-h-96 bg-white' >
         {results.length > 0 ? (

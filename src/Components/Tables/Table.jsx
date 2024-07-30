@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useCallback } from "react";
 import RoundedButton from "../Buttons/RoundedButton";
 import { ChooseContext } from "../../Helpers/ContextHelpers/ChooseContext";
 import PulseLoader from "react-spinners/PulseLoader";
-
+import {Link} from "react-router-dom"; 
 
 export default function Table({ title, handleClick }) {
 
@@ -60,7 +60,7 @@ export default function Table({ title, handleClick }) {
                           <td
                           className="py-2 px-4 border-b border-gray-200 text-sm"
                         >
-                          {element[column?.accessor]}
+                          <Link to={`/app/${title[1]}/${title[0]}/${element['id']}`}>{element[column?.accessor]}</Link>
                         </td>
                         ) : (
                           <td className="py-2 px-4 border-b border-gray-200">

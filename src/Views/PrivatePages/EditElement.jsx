@@ -13,7 +13,7 @@ import { SystemContext } from "../../Context/systemContext";
 import PulseLoader from "react-spinners/PulseLoader";
 
 
-export default function EditElement({modulesTitles,moduleSettings}) {
+export default function EditElement({modulesTitles}) {
   const { user } = useContext(UserContext);
   let location = useLocation();
   const navigate = useNavigate();
@@ -28,8 +28,13 @@ export default function EditElement({modulesTitles,moduleSettings}) {
     loadingElement,
     getElement,
     deleteElement } = useContext(ChooseContext('data')); 
-    const { systemValues, systemModuleValue,getSystemValues,getSystemModuleValue,loading } = useContext(SystemContext);  
-
+    const {  
+      modulesSettings,
+      publicPagesSettings,
+      getModuleSettings,
+      getPublicPagesSettings,
+      loading
+     } = useContext(SystemContext);
   
     const setElementValue  = async (pathId,pathName) =>{
       await getElement(pathId,pathName);
@@ -39,8 +44,9 @@ export default function EditElement({modulesTitles,moduleSettings}) {
       setElementValue(pathId,pathName);
       }, [pathId,pathName]);
     
-      const setSystemValues  = async () =>{
-        await getSystemModuleValue(pathModule);
+      const setSystemValues  = async (pathModule) =>{
+       // await getSystemModuleValue(pathModule);
+      await getModuleSettings();
       };
       
       useEffect(()=>{

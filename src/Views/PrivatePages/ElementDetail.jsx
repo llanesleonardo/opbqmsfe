@@ -11,7 +11,7 @@ import { SystemContext } from "../../Context/systemContext";
 import PulseLoader from "react-spinners/PulseLoader";
 import Table from "../../Components/Tables/Table";
 
-export default function ElementDetail({modulesTitles,moduleSettings}) {
+export default function ElementDetail({modulesTitles}) {
     const { user } = useContext(UserContext);
     let location = useLocation();
     const navigate = useNavigate();
@@ -26,17 +26,25 @@ export default function ElementDetail({modulesTitles,moduleSettings}) {
       loadingElement
     } = useContext(ChooseContext('data'));
     //useContext(ChooseContext(modulesTitles[pathModule][1]));
-      const { systemValues, systemModuleValue,getSystemValues,getSystemModuleValue,loading } = useContext(SystemContext);  
+    const {  
+      modulesSettings,
+      publicPagesSettings,
+      moduleStructureSettings,
+      getModuleSettings,
+      getPublicPagesSettings,
+      getModuleStructureSettingss,
+      loading
+     } = useContext(SystemContext);
 
- 
-
-      const setSystemValues  = async (pathModule) =>{
-        await getSystemModuleValue(pathModule);
+      const setSystemValues  = async (pathModule,pathName) =>{
+       // await getSystemModuleValue(pathModule);
+      await getModuleSettings();
+      await getModuleStructureSettingss(pathName);
       };
 
    
       useEffect(()=>{
-        setSystemValues(pathModule);
+        setSystemValues(pathModule,pathName);
      },[pathModule]);
     
      useEffect(() => {
@@ -93,27 +101,22 @@ export default function ElementDetail({modulesTitles,moduleSettings}) {
         : null
         }
      </div>
-        <div className='bg-white rounded border-1 w-[90%] mx-auto py-5 px-5 mt-5' >
-        <div className='flex flex-col flex-nowrap justify-between items-center'>
-           <p className='w-full text-sky-700 font-bold mb-3'>Processes </p>          
-            <Table
-                title={['process','processes']}
+     {moduleStructureSettings ? (
+           moduleStructureSettings?.relatedModules?.map((item,index)=>{
+            return (  
+              <div key={index} className='bg-white rounded border-1 w-[90%] mx-auto py-5 px-5 mt-5' >
+              <div className='flex flex-col flex-nowrap justify-between items-center'>
+                   <p className='w-full text-sky-700 font-bold mb-3'>{item?.titles[1]}</p>          
+              <Table
+                title={item.titles}
                 handleClick={handleClick}
               /> 
+            
            </div>
         </div>
-        <div className='bg-white rounded border-1 w-[90%] mx-auto py-5 px-5 mt-5' >
-        <div className='flex flex-row flex-nowrap justify-between items-center'> <p className='w-full text-sky-700 font-bold mb-3'>Users </p> </div>
-        </div>
-        <div className='bg-white rounded border-1 w-[90%] mx-auto py-5 px-5 mt-5' >
-        <div className='flex flex-row flex-nowrap justify-between items-center'> <p className='w-full text-sky-700 font-bold mb-3'>Profiles </p> </div>
-        </div>
-        <div className='bg-white rounded border-1 w-[90%] mx-auto py-5 px-5 mt-5' >
-        <div className='flex flex-row flex-nowrap justify-between items-center'> <p className='w-full text-sky-700 font-bold mb-3'>Roles </p> </div>
-        </div>
-        <div className='bg-white rounded border-1 w-[90%] mx-auto py-5 px-5 mt-5' >
-        <div className='flex flex-row flex-nowrap justify-between items-center'> <p className='w-full text-sky-700 font-bold mb-3'>Report cards </p> </div>
-        </div>
+         )
+        })
+           ):(<div></div>)}
     </div>
     </div>
   </div>

@@ -22,11 +22,11 @@ let data =await moduleData();
 let modulesPages = ()=>  data ? (
 data?.modulesSettings?.navMenus?.map((item)=> (
             <Route key={item.modulesTitles[1]} exact path={item.modulesTitles[1]} element={<LayoutModule />} >
-                 <Route exact index element={<ListElements modulesTitles={item.modulesTitles} moduleSettings={data?.modulesSettings} /> } />
-                 <Route exact path={`${item.modulesTitles[0]}/create`}  element={<CreateElement modulesTitles={item.modulesTitles} moduleSettings={data?.modulesSettings} />} />
-                 <Route exact path={`${item.modulesTitles[0]}/:id`}  element={<ElementDetail modulesTitles={item.modulesTitles} moduleSettings={data?.modulesSettings}/>} />
-                 <Route exact path={`${item.modulesTitles[0]}/:id/edit`} element={<EditElement modulesTitles={item.modulesTitles} moduleSettings={data?.modulesSettings} />} />
-                 <Route exact path={`${item.modulesTitles[0]}/:id/delete`} element={<DeleteElement modulesTitles={item.modulesTitles} moduleSettings={data?.modulesSettings} />} />
+                 <Route exact index element={<ListElements modulesTitles={item.modulesTitles}  /> } />
+                 <Route exact path={`${item.modulesTitles[0]}/create`}  element={<CreateElement modulesTitles={item.modulesTitles}  />} />
+                 <Route exact path={`${item.modulesTitles[0]}/:id`}  element={<ElementDetail modulesTitles={item.modulesTitles} />} />
+                 <Route exact path={`${item.modulesTitles[0]}/:id/edit`} element={<EditElement modulesTitles={item.modulesTitles} />} />
+                 <Route exact path={`${item.modulesTitles[0]}/:id/delete`} element={<DeleteElement modulesTitles={item.modulesTitles}  />} />
              </Route>  
          ))):(null);
 

@@ -16,7 +16,7 @@ export default function LayoutApp({children}) {
     <div className='flex flex-col flex-nowrap justify-stretch items-stretch'>
     <div className='flex flex-row flex-nowrap justify-stretch items-stretch'>
         <VerticalMenu />
-      <main className='w-4/5  bg-slate-200'>
+      <main className='w-4/6  bg-slate-200'>
         <HeaderApp user={user} setUrl={setUrl}/>
         <Outlet />
       </main>

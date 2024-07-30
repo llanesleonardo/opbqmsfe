@@ -10,7 +10,7 @@ import {ChooseForm} from "../../Helpers/FormHelpers/ChooseForm";
 import { SystemContext } from "../../Context/systemContext";
 import PulseLoader from "react-spinners/PulseLoader";
 
-export default function DeleteProject({modulesTitles,moduleSettings}) {
+export default function DeleteProject({modulesTitles}) {
 
   const { user } = useContext(UserContext);
   let location = useLocation();
@@ -26,7 +26,15 @@ const {
   deleteElement,
   loadingElement,
 } = useContext(ChooseContext('data')); 
-const { systemValues, systemModuleValue,getSystemValues,getSystemModuleValue,loading } = useContext(SystemContext);  
+
+const {  
+  modulesSettings,
+  publicPagesSettings,
+  getModuleSettings,
+  getPublicPagesSettings,
+  loading
+ } = useContext(SystemContext);
+
 
 const setElementValue  = async (pathId,pathName) =>{
   await getElement(pathId,pathName);
@@ -36,8 +44,9 @@ useEffect(() => {
   setElementValue(pathId,pathName);
   }, [pathId,pathName]);
 
-  const setSystemValues  = async () =>{
-    await getSystemModuleValue(pathModule);
+  const setSystemValues  = async (pathModule) =>{
+    //await getSystemModuleValue(pathModule);
+ await getModuleSettings();
   };
   
   useEffect(()=>{
@@ -79,7 +88,7 @@ useEffect(() => {
                       </div>
               ) : (
                 <ModuleHeader
-                  titles={systemModuleValue.modulesTitles}
+                  titles={modulesTitles}
                   pathId={pathId}
                   handleClick={handleClick}
                   modStr={firstLetterToUpperCase(pathName)}

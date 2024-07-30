@@ -18,7 +18,9 @@ const DataProvider = ({ children }) => {
       setElement(result);
   },[getElementEP]);
   const getList =  useCallback(async (pathName) =>{
+  
     const results = await getListEP(pathName,setLoadingElement);
+    console.log('getList',results);
     setList(results)
     },[getListEP]);
   const deleteElement =  useCallback(async (pathId,pathName) =>{ setDeletedElement(await deleteElementEP(pathId,pathName))},[]);

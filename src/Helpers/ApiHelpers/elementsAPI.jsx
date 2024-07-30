@@ -7,12 +7,26 @@ const getSystemSettingData = async ()=>{
     const response = await axios.get(
       `http://localhost:3001/api/v1/settings`
     );
-    console.log('getSystemSettingData',response);
+   // console.log('getSystemSettingData',response);
  return response.data;
     } catch (error) {
       console.log(error);
     }
 } 
+
+const getModuleStructureSettings = async () =>{
+  
+
+  try {
+    const response = await axios.get(
+      `http://localhost:3001/api/v1/settings/modules-structure`
+    );
+   // console.log('getModuleStructureSettings',response);
+ return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+}
 
 const getElementEP = async (pathId,pathName,setLoadingElement) => {
   setLoadingElement(true);  
@@ -81,7 +95,7 @@ const getElementEP = async (pathId,pathName,setLoadingElement) => {
   };
 
 
-return {getSystemSettingData, getElementEP,getListEP,deleteElementEP,updateElementEP }
+return {getSystemSettingData,getModuleStructureSettings, getElementEP,getListEP,deleteElementEP,updateElementEP }
 }
 
 export default elementsAPI;

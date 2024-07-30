@@ -17,7 +17,7 @@ const UserProvider = ({ children }) => {
           console.log('ERROR'); 
           return;
         }
-        console.log(response.data);
+
         setUser(response.data[0]);
 
       } catch (error) {

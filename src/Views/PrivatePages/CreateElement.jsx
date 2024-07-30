@@ -10,21 +10,24 @@ import { SystemContext } from "../../Context/systemContext";
 import { ChooseForm } from "../../Helpers/FormHelpers/ChooseForm";
 import PulseLoader from "react-spinners/PulseLoader";
 
-export default function CreateElement({modulesTitles,moduleSettings}) {
+export default function CreateElement({modulesTitles}) {
   const { user } = useContext(UserContext);
   let location = useLocation();
   const navigate = useNavigate();
-  const {
-    systemValues,
-    systemModuleValue,
-    getSystemValues,
-    getSystemModuleValue,
-    loading,
-  } = useContext(SystemContext);
+  const {  
+    modulesSettings,
+    publicPagesSettings,
+    getModuleSettings,
+    getPublicPagesSettings,
+    loading
+   } = useContext(SystemContext);
+
+   
   const { pathModule, pathName, pathId, pathAction } = setPathValues(location);
 
   const setSystemValues = async () => {
-    await getSystemModuleValue(pathModule);
+   // await getSystemModuleValue(pathModule);
+   await getModuleSettings()
   };
 
   useEffect(() => {

@@ -9,24 +9,25 @@ import { setPathValues } from "../../Helpers/UrlHeperls/urlHelper";
 import { SystemContext } from "../../Context/systemContext";
 import PulseLoader from "react-spinners/PulseLoader";
 
-export default function ListElements({modulesTitles,moduleSettings}) {
+export default function ListElements({modulesTitles}) {
   
   const navigate = useNavigate();
   let location = useLocation();
   const { user } = useContext(UserContext);
-  const {
-    systemValues,
-    systemModulesValues,
-    systemModuleValue,
-    getSystemValues,
-    getSystemModuleValue,
-    loading,
-  } = useContext(SystemContext);
+  const {  
+    modulesSettings,
+    publicPagesSettings,
+    getModuleSettings,
+    getPublicPagesSettings,
+    loading
+   } = useContext(SystemContext);
+   
   const { pathModule, pathName, pathId, pathAction } = setPathValues(location);
 
   const setSystemValues = async (pathModule) => {
-    await getSystemModuleValue(pathModule);
-  };
+//    await getSystemModuleValue(pathModule);
+await getModuleSettings();  
+};
 
 
 useEffect(() => {
@@ -43,7 +44,6 @@ useEffect(() => {
         <div className="w-auto h-[90%] overflow-y-scroll">
           <div className="w-auto overflow-y-scroll flex flex-col flex-wrap  justify-start items-center">
             <div className="w-[95%] mx-auto flex flex-row flex-nowrap justify-between items-center">
-              {console.log('moduleSettings',moduleSettings.modulesStructure['Context'])}
               {modulesTitles === undefined ? (
                 <div className="my-10">
                   <PulseLoader
